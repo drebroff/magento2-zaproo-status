@@ -1,0 +1,15 @@
+<?php
+/**
+ * @var $block \Funami\Zaproo\Block\ZaprooStatus
+ */
+?>
+<div>
+    <form style="width: 50%" action="<?= $this->getUrl('funami/zaporro/save') ?>">
+        <select name="zaproo" id="zaproo_id">
+            <option <?= $block->getZaprooStatus() ? "selected": ''?> value="yes">Yes</option>
+            <option <?= !$block->getZaprooStatus() ? "selected": ''?> value="no">No</option>
+
+        </select>
+        <div style="margin:3% 0 0 0"><input type="submit" value="Submit"></div>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+{
+    "name": "funami/module-zaproo",
+    "description": "",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "email": "dmitrij.rebrov@outlook.com",
+            "name": "Dmitrij Rebrov"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Funami\\Zaproo\\": ""
+        }
+    }
+}
