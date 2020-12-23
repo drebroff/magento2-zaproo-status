@@ -53,24 +53,25 @@ class Save extends \Magento\Framework\App\Action\Action
         $params = $this->_request->getParams();
         $paramsBinary = $params['zaproo'] == "yes" ? 1 : 0;
         $customerId = $this->_customerSession->getCustomer()->getId();
-        echo($customerId);
         try{
             $customer = $this->_customerRepository->getById($customerId);
         } catch (NoSuchEntityException $e) {
 
             $this->messageManager->addExceptionMessage($e);
-            $this->_redirect('funami/zaproo/status');
+            $this->_redirect('customer/account/login');
         } catch (LocalizedException $e) {
         }
         $customer->setCustomAttribute('zaproo_status', $paramsBinary);
         try {
             $this->_customerRepository->save($customer);
             $this->messageManager->addSuccessMessage("Zaproo status saved");
+            $this->_redirect('funami/zaproo/status');
+
         } catch (InputException $e) {
             $this->messageManager->addExceptionMessage($e);
+            $this->_redirect('/');
 
         }
-        $this->_redirect('funami/zaproo/status');
 //        return $this->resultPageFactory->create();
     }
 }

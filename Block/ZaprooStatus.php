@@ -18,10 +18,12 @@ class ZaprooStatus extends \Magento\Framework\View\Element\Template
 {
     protected $_customerSession;
     protected $_customerRepository;
+
     /**
-     * Constructor
-     *
-     * @param \Magento\Framework\View\Element\Template\Context  $context
+     * ZaprooStatus constructor.
+     * @param CustomerSession $customerSession
+     * @param CustomerRepositoryInterface $customerRepository
+     * @param \Magento\Framework\View\Element\Template\Context $context
      * @param array $data
      */
     public function __construct(
@@ -45,7 +47,7 @@ class ZaprooStatus extends \Magento\Framework\View\Element\Template
     public function getZaprooStatus() {
         $customerId = $this->_customerSession->getCustomer()->getId();
         if (!$customerId) {
-            return "Fail";
+            return 'fail';
         }
         $customer = $this->_customerRepository->getById($customerId);
         return $customer->getCustomAttribute('zaproo_status')->getValue();
