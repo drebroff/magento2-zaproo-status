@@ -4,7 +4,8 @@
  */
 ?>
 <div>
-    <form style="width: 50%" action="<?= $this->getUrl('funami/zaporro/save') ?>">
+    <?php if($block->getZaprooStatus() !== "fail") { ?>
+    <form style="width: 50%" action="<?= $this->getUrl('funami/zaproo/save') ?>">
         <select name="zaproo" id="zaproo_id">
             <option <?= $block->getZaprooStatus() ? "selected": ''?> value="yes">Yes</option>
             <option <?= !$block->getZaprooStatus() ? "selected": ''?> value="no">No</option>
@@ -12,4 +13,5 @@
         </select>
         <div style="margin:3% 0 0 0"><input type="submit" value="Submit"></div>
     </form>
+    <?php } ?>
 </div>

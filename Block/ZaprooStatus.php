@@ -35,8 +35,18 @@ class ZaprooStatus extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
+    /**
+     * Gets zaproo_status attribute if customer is logged in
+     *
+     * @return mixed|string
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function getZaprooStatus() {
         $customerId = $this->_customerSession->getCustomer()->getId();
+        if (!$customerId) {
+            return "Fail";
+        }
         $customer = $this->_customerRepository->getById($customerId);
         return $customer->getCustomAttribute('zaproo_status')->getValue();
     }

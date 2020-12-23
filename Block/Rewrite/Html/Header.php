@@ -30,6 +30,13 @@ class Header extends \Magento\Framework\View\Element\Template
     protected $_template = 'Funami_Zaproo::html/header.phtml';
 
 
+    /**
+     * Header constructor.
+     * @param CustomerSession $customerSession
+     * @param CustomerRepositoryInterface $customerRepository
+     * @param Template\Context $context
+     * @param array $data
+     */
     public function __construct(
         CustomerSession $customerSession,
         CustomerRepositoryInterface $customerRepository,
@@ -41,10 +48,17 @@ class Header extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
-
+    /**
+     * Retrieve zaproo_status customer attribute
+     *
+     * @return string
+     */
     public function getZaprooStatus() {
         $customerId = $this->_customerSession->getCustomer()->getId();
-        $customer =$this->_customerRepository->getById($customerId);
+        if (!$customerId) {
+            return "Check customer account";
+        }
+        $customer = $this->_customerRepository->getById($customerId);
         return $customer->getCustomAttribute('zaproo_status')->getValue() ? "Yes" : "No";
     }
 
